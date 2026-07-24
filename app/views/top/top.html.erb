@@ -9,13 +9,13 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       gmp-map {
-        height: 100%;
+        height: 90%;
       }
 
       /* Optional: Makes the sample page fill the window. */
       html,
       body {
-        height: 100%;
+        height: 90%;
         margin: 0;
         padding: 0;
       }
@@ -25,5 +25,8 @@
     <gmp-map center="40.12150192260742,-100.45039367675781" zoom="4" map-id="DEMO_MAP_ID">
       <gmp-advanced-marker position="40.12150192260742,-100.45039367675781" title="My location"></gmp-advanced-marker>
     </gmp-map>
+
+
+    <%= link_to "新規登録" ,new_event_path %>
   </body>
 </html>
