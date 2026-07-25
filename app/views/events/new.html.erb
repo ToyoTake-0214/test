@@ -1,0 +1,14 @@
+<div>
+  <p>テスト用のフォーム</p>
+  <%= form_with model: @event do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: "イベント名" %>
+    </div>
+    <div>
+      <%= f.label :address %>
+      <%= f.text_field :address, placeholder: "住所" %>
+    </div>
+      <%= f.submit nil%>
+    <% end %>
+</div>

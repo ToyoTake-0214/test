@@ -53,6 +53,7 @@ group :development do
 end
 
 gem 'dotenv-rails'
+gem 'geocoder'
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]

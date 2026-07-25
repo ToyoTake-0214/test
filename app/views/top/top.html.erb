@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
     <title>Simple Marker</title>
-    <!-- The callback parameter is required, so we use console.debug as a noop -->
-    <script async src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=console.debug&libraries=maps,marker&v=beta">
-    </script>
+
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      gmp-map {
-        height: 100%;
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
+
+    <script>
+    let map
+
+      function initMap(){
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 35.68123620000001, lng:139.7671248},
+            zoom: 12,
+        });
+
+      <% Event.where.not(latitude: nil, longitude: nil).each do |m| %>
+          (function(){
+          var contentString = "住所：<%= m.address %>"; 
+
+          var marker = new google.maps.Marker({
+              position:{lat: <%= m.latitude %>, lng: <%= m.longitude %>},
+              map: map,
+              title: contentString
+          });
+
+          })();
+      <% end %>
+
       }
 
-      /* Optional: Makes the sample page fill the window. */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <gmp-map center="40.12150192260742,-100.45039367675781" zoom="4" map-id="DEMO_MAP_ID">
-      <gmp-advanced-marker position="40.12150192260742,-100.45039367675781" title="My location"></gmp-advanced-marker>
-    </gmp-map>
-  </body>
+
+    </script>
+
+    <div id="map"></div>
+    <%= link_to "新規登録" ,new_event_path %>
+
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer>
+    </script>
+
 </html>
