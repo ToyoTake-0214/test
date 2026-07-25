@@ -1,4 +1,9 @@
 class EventsController < ApplicationController
+
+  def index
+    @events = Event.all
+  end
+
   def new
     @event = Event.new
   end
@@ -11,6 +16,7 @@ class EventsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
 
   private
 
