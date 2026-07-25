@@ -17,10 +17,15 @@
             center: {lat: 35.68123620000001, lng:139.7671248},
             zoom: 12,
         });
+      
+       const infoWindow = new google.maps.InfoWindow();
 
       <% Event.where.not(latitude: nil, longitude: nil).each do |m| %>
           (function(){
-          var contentString = "住所：<%= m.address %>"; 
+          var contentString =
+            "名前: <%= m.name %>"+
+            "<br>" +
+            "住所：<%= m.address %>";
 
           var marker = new google.maps.Marker({
               position:{lat: <%= m.latitude %>, lng: <%= m.longitude %>},
@@ -28,7 +33,16 @@
               title: contentString
           });
 
-          })();
+        marker.addListener("click", function() {
+          infoWindow.close();
+          infoWindow.setContent(contentString);
+
+          infoWindow.open({
+            map: map,
+            anchor: marker
+          });
+        });
+      })();
       <% end %>
 
       }
